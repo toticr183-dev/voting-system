@@ -639,7 +639,610 @@
                 flex-direction: column;
             }
         }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* ===== HEADER - FIXED WITH PROPER SPACING ===== */
+        header {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .logo-text {
+            line-height: 1.2;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+        
+        .logo-text p {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.7);
+            margin: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .btn-demo {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1e3c72 !important;
+            padding: 0.6rem 1.5rem !important;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem !important;
+        }
+        
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+        
+        .btn-demo::after {
+            display: none !important;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 5% 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ===== ELECTION TABLE SECTION ===== */
+        .election-table-section {
+            padding: 80px 5%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title span {
+            color: #ffd700;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+        
+        .election-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+        }
+        
+        .election-table thead {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1e3c72;
+        }
+        
+        .election-table th {
+            padding: 18px 15px;
+            font-weight: 700;
+            text-align: left;
+            font-size: 1rem;
+        }
+        
+        .election-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .election-table tbody tr:hover {
+            background: rgba(255,215,0,0.1);
+            transition: background 0.3s ease;
+        }
+        
+        .candidate-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .candidate-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .progress-bar {
+            width: 150px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border-radius: 4px;
+        }
+        
+        .vote-badge {
+            background: #4cd137;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-badge {
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(30,60,114,0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid rgba(255,215,0,0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 10px;
+            }
+            
+            .btn-demo {
+                display: inline-block;
+                width: auto;
+            }
+            
+            .election-table {
+                font-size: 0.9rem;
+            }
+            
+            .progress-bar {
+                width: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .election-table th,
+            .election-table td {
+                padding: 10px 5px;
+            }
+            
+            .candidate-avatar {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            
+            .progress-bar {
+                width: 60px;
+            }
+        }
     </style>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <div class="logo-icon">E</div>
+                <div class="logo-text">
+                    <h1>E-VEREST</h1>
+                    <p>Digital Voting System</p>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#elections">Elections</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="vote.html" class="btn-demo">Live Demo</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">
+                    <i class="fas fa-vote-yea"></i> Student Council Elections 2026
+                </div>
+                <h1>Digital Voting<br><span>Made Simple & Secure</span></h1>
+                <p>Empowering schools with modern voting technology. Transparent, fast, and accessible elections for every student.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Votes Cast</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Secure</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Available</span>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <a href="vote.html" class="btn btn-primary">Try Demo</a>
+                    <a href="#features" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Voting Illustration" class="vote-illustration">
+            </div>
+        </div>
+    </section>
+    
+    <!-- NEW ELECTION TABLE SECTION -->
+    <section class="election-table-section" id="elections">
+        <h2 class="section-title">Current <span>Election</span> Results</h2>
+        <p class="section-subtitle">Student Council 2026 - Live Results Table</p>
+        
+        <div class="table-container">
+            <table class="election-table">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Candidate</th>
+                        <th>Grade</th>
+                        <th>Votes</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- President Row 1 -->
+                    <tr>
+                        <td rowspan="3" style="vertical-align: middle; font-weight: 600;">President</td>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">A</div>
+                                <span>Abebe Kebede</span>
+                            </div>
+                        </td>
+                        <td>12</td>
+                        <td>45</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge"><i class="fas fa-circle"></i> Leading</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">T</div>
+                                <span>Tigist Haile</span>
+                            </div>
+                        </td>
+                        <td>11</td>
+                        <td>38</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">In Race</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">D</div>
+                                <span>Dawit Mekonnen</span>
+                            </div>
+                        </td>
+                        <td>12</td>
+                        <td>27</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">In Race</span></td>
+                    </tr>
+                    
+                    <!-- Vice President Row 1 -->
+                    <tr>
+                        <td rowspan="2" style="vertical-align: middle; font-weight: 600;">Vice President</td>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">M</div>
+                                <span>Meron Assefa</span>
+                            </div>
+                        </td>
+                        <td>11</td>
+                        <td>52</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 55%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge"><i class="fas fa-circle"></i> Leading</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">Y</div>
+                                <span>Yonas Desta</span>
+                            </div>
+                        </td>
+                        <td>12</td>
+                        <td>41</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">In Race</span></td>
+                    </tr>
+                    
+                    <!-- Secretary Row 1 -->
+                    <tr>
+                        <td rowspan="3" style="vertical-align: middle; font-weight: 600;">Secretary</td>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">H</div>
+                                <span>Hanna Berhanu</span>
+                            </div>
+                        </td>
+                        <td>11</td>
+                        <td>33</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 35%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge"><i class="fas fa-circle"></i> Leading</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">N</div>
+                                <span>Nahom Tesfaye</span>
+                            </div>
+                        </td>
+                        <td>12</td>
+                        <td>29</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 31%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">In Race</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="candidate-cell">
+                                <div class="candidate-avatar">B</div>
+                                <span>Bethelhem Ayele</span>
+                            </div>
+                        </td>
+                        <td>10</td>
+                        <td>31</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 33%"></div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">In Race</span></td>
+                    </tr>
+                    
+                    <!-- Summary Row -->
+                    <tr style="background: linear-gradient(135deg, #ffd700, #ffaa00); color: #1e3c72;">
+                        <td colspan="2"><strong>Total Votes Cast</strong></td>
+                        <td>-</td>
+                        <td><strong>296</strong></td>
+                        <td colspan="2">Turnout: 65% of eligible voters</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="vote.html" class="btn btn-primary" style="background: linear-gradient(135deg, #ffd700, #ffaa00); color: #1e3c72;">Cast Your Vote in Demo</a>
+        </div>
+    </section>
+    
+    <!-- REST OF YOUR EXISTING SECTIONS (Features, How It Works, Testimonials, Footer) -->
+    <!-- Keep all your beautiful existing sections here -->
+    
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileBtn.querySelector('i');
+                if (icon) icon.className = 'fas fa-bars';
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 </head>
 <body>
     <header>
