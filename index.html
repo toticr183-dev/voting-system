@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everest Voting System | Student Elections</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 i {
+            color: #ffd700;
+        }
+        
+        .header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2rem;
+        }
+        
+        /* ===== ELECTION INFO ===== */
+        .election-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .election-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .election-header h2 {
+            font-size: 2rem;
+        }
+        
+        .status-badge {
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #4cd137;
+            color: white;
+        }
+        
+        .election-dates {
+            display: flex;
+            gap: 30px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .election-dates i {
+            margin-right: 5px;
+            color: #ffd700;
+        }
+        
+        /* ===== VOTER VERIFICATION ===== */
+        .verification-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .verification-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .verification-input {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+        
+        .verification-input input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .verification-input button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1e3c72;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .verification-input button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+        
+        .voter-status {
+            margin-top: 15px;
+            color: #ffd700;
+        }
+        
+        /* ===== POSITIONS GRID ===== */
+        .positions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .position-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .position-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+        }
+        
+        .position-header {
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+            padding-bottom: 15px;
+        }
+        
+        .position-header h3 {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+        
+        .position-header p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Candidates */
+        .candidates-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .candidate-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .candidate-item:hover {
+            background: rgba(255,215,0,0.1);
+            transform: translateX(10px);
+        }
+        
+        .candidate-item.selected {
+            border-color: #ffd700;
+            background: rgba(255,215,0,0.15);
+        }
+        
+        .candidate-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .candidate-info {
+            flex: 1;
+        }
+        
+        .candidate-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .candidate-info p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+        
+        .candidate-check {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+        
+        .candidate-item.selected .candidate-check {
+            background: #ffd700;
+            color: #1e3c72;
+        }
+        
+        /* ===== VOTE BUTTON ===== */
+        .vote-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .vote-btn {
+            padding: 20px 60px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1e3c72;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 30px rgba(255,215,0,0.3);
+        }
+        
+        .vote-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 30px 40px rgba(255,215,0,0.4);
+        }
+        
+        .vote-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* ===== RESULTS SECTION ===== */
+        .results-section {
+            margin-top: 60px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+        }
+        
+        .results-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        
+        .results-section h2 i {
+            color: #ffd700;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 25px;
+        }
+        
+        .result-card h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .result-bar {
+            margin-bottom: 15px;
+        }
+        
+        .result-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .verification-input {
+                flex-direction: column;
+            }
+            
+            .election-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .vote-btn {
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-vote-yea"></i> Everest Voting System</h1>
+            <p>Cast your vote for student council elections 2026</p>
+        </div>
+        
+        <!-- Election Info -->
+        <div class="election-info">
+            <div class="election-header">
+                <h2>Student Council Elections 2026</h2>
+                <span class="status-badge status-active"><i class="fas fa-circle"></i> Active</span>
+            </div>
+            <div class="election-dates">
+                <span><i class="fas fa-calendar-alt"></i> Start: March 10, 2026</span>
+                <span><i class="fas fa-calendar-check"></i> End: March 15, 2026</span>
+            </div>
+        </div>
+        
+        <!-- Voter Verification -->
+        <div class="verification-box" id="verificationBox">
+            <h3><i class="fas fa-id-card"></i> Verify Your Voter ID</h3>
+            <div class="verification-input">
+                <input type="text" id="voterId" placeholder="Enter your student ID (e.g., STU001)" value="STU001">
+                <button onclick="verifyVoter()">Verify</button>
+            </div>
+            <div class="voter-status" id="voterStatus"></div>
+        </div>
+        
+        <!-- Voting Positions -->
+        <div id="votingSection" style="display: none;">
+            <div class="positions-grid" id="positionsContainer">
+                <!-- Positions will be loaded here -->
+            </div>
+            
+            <div class="vote-actions">
+                <button class="vote-btn" id="submitVote" onclick="submitVotes()" disabled>
+                    <i class="fas fa-check-circle"></i> Cast Your Vote
+                </button>
+            </div>
+        </div>
+        
+        <!-- Live Results -->
+        <div class="results-section" id="resultsSection">
+            <h2><i class="fas fa-chart-bar"></i> Live Results</h2>
+            <div class="results-grid" id="resultsContainer">
+                <!-- Results will be loaded here -->
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 Everest Youth Academy - Secure Voting System</p>
+        </footer>
+    </div>
+    
+    <script>
+        // ===== CONFIGURATION =====
+        const API_URL = 'https://YOUR-BACKEND-URL.onrender.com'; // Replace with your Render URL
+        let currentVoterId = null;
+        let selectedVotes = {};
+        let electionData = null;
+        
+        // ===== LOAD ELECTION DATA =====
+        async function loadElectionData() {
+            try {
+                // For demo, using sample data
+                electionData = {
+                    id: 'student-council-2026',
+                    title: 'Student Council Elections 2026',
+                    positions: [
+                        {
+                            id: 'president',
+                            title: 'President',
+                            description: 'Lead the student council',
+                            candidates: [
+                                { id: 'cand1', name: 'Abebe Kebede', grade: '12', photo: 'https://via.placeholder.com/100' },
+                                { id: 'cand2', name: 'Tigist Haile', grade: '11', photo: 'https://via.placeholder.com/100' },
+                                { id: 'cand3', name: 'Dawit Mekonnen', grade: '12', photo: 'https://via.placeholder.com/100' }
+                            ]
+                        },
+                        {
+                            id: 'vice-president',
+                            title: 'Vice President',
+                            description: 'Support the president',
+                            candidates: [
+                                { id: 'cand4', name: 'Meron Assefa', grade: '11', photo: 'https://via.placeholder.com/100' },
+                                { id: 'cand5', name: 'Yonas Desta', grade: '12', photo: 'https://via.placeholder.com/100' }
+                            ]
+                        },
+                        {
+                            id: 'secretary',
+                            title: 'Secretary',
+                            description: 'Record meetings and communications',
+                            candidates: [
+                                { id: 'cand6', name: 'Hanna Berhanu', grade: '11', photo: 'https://via.placeholder.com/100' },
+                                { id: 'cand7', name: 'Nahom Tesfaye', grade: '12', photo: 'https://via.placeholder.com/100' },
+                                { id: 'cand8', name: 'Bethelhem Ayele', grade: '10', photo: 'https://via.placeholder.com/100' }
+                            ]
+                        }
+                    ]
+                };
+                
+                renderPositions();
+                loadResults();
+                
+            } catch (error) {
+                console.error('Failed to load election data:', error);
+            }
+        }
+        
+        // ===== RENDER POSITIONS =====
+        function renderPositions() {
+            const container = document.getElementById('positionsContainer');
+            container.innerHTML = '';
+            
+            electionData.positions.forEach(position => {
+                const positionHtml = `
+                    <div class="position-card">
+                        <div class="position-header">
+                            <h3>${position.title}</h3>
+                            <p>${position.description}</p>
+                        </div>
+                        <div class="candidates-list" data-position="${position.id}">
+                            ${position.candidates.map(candidate => `
+                                <div class="candidate-item" onclick="selectCandidate('${position.id}', '${candidate.id}')" id="cand-${position.id}-${candidate.id}">
+                                    <div class="candidate-photo">${candidate.name.charAt(0)}</div>
+                                    <div class="candidate-info">
+                                        <h4>${candidate.name}</h4>
+                                        <p>Grade ${candidate.grade}</p>
+                                    </div>
+                                    <div class="candidate-check">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += positionHtml;
+            });
+        }
+        
+        // ===== SELECT CANDIDATE =====
+        function selectCandidate(positionId, candidateId) {
+            if (!currentVoterId) {
+                alert('Please verify your voter ID first');
+                return;
+            }
+            
+            // Remove selected class from all candidates in this position
+            document.querySelectorAll(`[data-position="${positionId}"] .candidate-item`).forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selected class to chosen candidate
+            document.getElementById(`cand-${positionId}-${candidateId}`).classList.add('selected');
+            
+            // Store selection
+            selectedVotes[positionId] = candidateId;
+            
+            // Enable vote button if all positions are selected
+            const allPositionsSelected = electionData.positions.every(p => selectedVotes[p.id]);
+            document.getElementById('submitVote').disabled = !allPositionsSelected;
+        }
+        
+        // ===== VERIFY VOTER =====
+        function verifyVoter() {
+            const voterId = document.getElementById('voterId').value.trim();
+            
+            if (!voterId) {
+                alert('Please enter your student ID');
+                return;
+            }
+            
+            currentVoterId = voterId;
+            document.getElementById('voterStatus').innerHTML = '<i class="fas fa-check-circle"></i> Verified! You can now vote.';
+            document.getElementById('votingSection').style.display = 'block';
+        }
+        
+        // ===== SUBMIT VOTES =====
+        async function submitVotes() {
+            if (!currentVoterId) {
+                alert('Please verify your voter ID');
+                return;
+            }
+            
+            // For demo, just show success
+            alert('✅ Your votes have been recorded! Thank you for voting.');
+            
+            // Disable voting
+            document.querySelectorAll('.candidate-item').forEach(item => {
+                item.style.pointerEvents = 'none';
+                item.style.opacity = '0.5';
+            });
+            document.getElementById('submitVote').disabled = true;
+            
+            // Refresh results
+            loadResults();
+        }
+        
+        // ===== LOAD RESULTS =====
+        function loadResults() {
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            // Demo results data
+            const results = [
+                {
+                    position: 'President',
+                    candidates: [
+                        { name: 'Abebe Kebede', votes: 45 },
+                        { name: 'Tigist Haile', votes: 38 },
+                        { name: 'Dawit Mekonnen', votes: 27 }
+                    ],
+                    total: 110
+                },
+                {
+                    position: 'Vice President',
+                    candidates: [
+                        { name: 'Meron Assefa', votes: 52 },
+                        { name: 'Yonas Desta', votes: 41 }
+                    ],
+                    total: 93
+                },
+                {
+                    position: 'Secretary',
+                    candidates: [
+                        { name: 'Hanna Berhanu', votes: 33 },
+                        { name: 'Nahom Tesfaye', votes: 29 },
+                        { name: 'Bethelhem Ayele', votes: 31 }
+                    ],
+                    total: 93
+                }
+            ];
+            
+            resultsContainer.innerHTML = results.map(result => `
+                <div class="result-card">
+                    <h3>${result.position}</h3>
+                    ${result.candidates.map(cand => {
+                        const percentage = ((cand.votes / result.total) * 100).toFixed(1);
+                        return `
+                            <div class="result-bar">
+                                <div class="result-label">
+                                    <span>${cand.name}</span>
+                                    <span>${cand.votes} votes (${percentage}%)</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${percentage}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `).join('');
+        }
+        
+        // ===== INIT =====
+        loadElectionData();
+        
+        // Auto-refresh results every 30 seconds
+        setInterval(loadResults, 30000);
+    </script>
+</body>
+</html>
